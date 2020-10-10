@@ -1,18 +1,25 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  requestUsers,
+} from "../../redux/users/users.actions";
 import { Button } from "../../components";
 
-// const logo = `${process.env.PUBLIC_URL}/logo.svg`;
+const AppContainer = () => {
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
-class AppContainer extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <Button>
-          Button
-        </Button>
-      </React.Fragment>
-    );
-  }
-}
+  useEffect(() => {
+    dispatch(requestUsers(50));
+  }, [dispatch]);
+
+  console.log(users);
+
+  return (
+    <React.Fragment>
+      <Button>Button</Button>
+    </React.Fragment>
+  );
+};
 
 export default AppContainer;
